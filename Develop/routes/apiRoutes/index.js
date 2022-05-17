@@ -1,6 +1,7 @@
-const path = require("require");
-const db = require("../../db/db.json");
+let db = require("../../db/db.json");
+
 const router = require("express").Router();
+
 const {
   validateNote,
   createNote,
@@ -16,8 +17,9 @@ router.get("/notes", (req, res) => {
 
 //create/add new note
 router.post("/notes", (req, res) => {
-  let id;
-  req.body.id = iq;
+  let results = db.length();
+  let id = results;
+  req.body.id = id;
 
   //no body in the note?
   if (!validateNote(req.body)) {

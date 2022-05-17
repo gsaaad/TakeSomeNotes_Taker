@@ -1,6 +1,6 @@
 //getting constants for packages or database
 const fs = require("fs");
-const path = require(path);
+const path = require("path");
 const db = require("../db/db.json");
 
 //validateNotes
