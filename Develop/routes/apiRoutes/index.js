@@ -1,6 +1,6 @@
 let db = require("../../db/db.json");
-
 const router = require("express").Router();
+const crypto = require("crypto");
 
 const {
   validateNote,
@@ -17,15 +17,15 @@ router.get("/notes", (req, res) => {
 
 //create/add new note
 router.post("/notes", (req, res) => {
-  let results = db.length();
-  let id = results;
+  // assigning random id to note
+  let id = crypto.randomBytes(16).toString("hex");
   req.body.id = id;
 
-  //no body in the note?
+  // validate if note has title and text (extra layer of validation)
   if (!validateNote(req.body)) {
-    res.status(400).send("Something looks wrong.... Try Again!");
+    res.status(400).send("Something looks wrong... Try Again!");
   } else {
-    const note = createNote(req.nody, db);
+    const note = createNote(req.body, db);
     res.json(note);
   }
 });
